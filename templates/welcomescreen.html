@@ -1,5 +1,9 @@
-<div id="welcomescreen" class="welcomescreen">
-    <h1 class="quiz__maintitle">Bienvenido a este Quiz</h1>
-    <p class="quiz__description">Este Quiz tiene <span class="numberOfQuestions">Y</span> preguntas</p>
-    <button id="welcome_btn" class="quiz__btn">Ok</button>
+<div id='welcomescreen' class='welcomescreen'>
+    <h1 class='quiz__maintitle'>Bienvenido a $this.title</h1>
+    <input type='text' name='username' id='username' placeholder='username' />
+    <p class='quiz__description'>
+        Este Quiz tiene
+        <span class='numberOfQuestions'> $this.getNumberOfQuestions()</span> preguntas
+    </p>
+    <button id='welcome_btn' class='quiz__btn'>Iniciar</button>
 </div>

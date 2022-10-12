@@ -1,13 +1,12 @@
-export class User{
+export class User {
     username;
     password;
     nombre;
-    encuesta;//Tipo Encuesta
+    encuesta; //Tipo Encuesta
 
-    constructor(username, password, nombre){
+    constructor(username) {
         this.username = username;
-        this.password = password;
-        this.nombre = nombre;
+
     }
-   
+
 }
