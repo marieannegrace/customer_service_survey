@@ -2,6 +2,7 @@ import { Option } from "./Option.js"
 export class Question {
     title;
     options = [];
+    response;
     constructor(title, options, app) {
         this.title = title;
         this.app = app;
@@ -43,9 +44,10 @@ export class Question {
             btn.addEventListener("click", 
                 (event) => {
                     const optElem =  event.target;
-                    let value = optElem.getAttribute("value")
-                    let activator = optElem.getAttribute("activator")
-                    let nextQuestionIndex = optElem.getAttribute("nextQuestionIndex")
+                    const value = optElem.getAttribute("value")
+                    const activator = optElem.getAttribute("activator")
+                    const nextQuestionIndex = optElem.getAttribute("nextQuestionIndex")
+                    this.response = this.options.find(opt => opt.value == value )
                     if (nextQuestionIndex && value == activator) {
                        const question = app.getNextQuestion(nextQuestionIndex)
                        question.start();
@@ -54,7 +56,7 @@ export class Question {
                         const question = app.getNextQuestion()
                         question.start();
                     }
-                     
+                     app.answers.start();
                 }
             )
         }

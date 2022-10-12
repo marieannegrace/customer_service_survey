@@ -62,7 +62,7 @@ export class Quiz {
     }
     startBtnEvent = async () =>{
         //1.agregar usuario a array de usuarios    
-        this.app.addUser();
+        this.app.addUser(this);
         //2. cargar primera Pregunta
         let question = this.app.getNextQuestion(0)
         question.start()

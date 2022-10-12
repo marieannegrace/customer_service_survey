@@ -3,6 +3,7 @@ import { Answers } from "./answers.js";
 export class Display {
     selectorId; //string for query selector
     users = [];
+    currentUser;
     currentQuestion = 0;
     answers = new Answers(this);
     constructor(selectorId) {
@@ -20,10 +21,11 @@ export class Display {
 
     }
 
-    addUser() {
+    addUser(quiz) {
         const usernameInput = document.getElementById("username");
-        this.currentUser = new User(usernameInput.value)
+        this.currentUser = new User(usernameInput.value, quiz)
         this.users.push(this.currentUser)
+
         return this.currentUser;
     }
     setQuestions(questions) {
@@ -37,11 +39,11 @@ export class Display {
 
     getNextQuestion(currentQuestion) {
         this.currentQuestion = currentQuestion >= 0 ? currentQuestion : ++this.currentQuestion;
-        if (this.currentQuestion < this.questions.length) {
+        if (this.currentQuestion <= this.questions.length) {
             return this.questions[this.currentQuestion];
         } else {
             alert("finalizado")
-            this.answers.start();
+            this.answers.startPersonal();
         }
     }
 }

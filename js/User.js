@@ -1,12 +1,10 @@
 export class User {
     username;
-    password;
-    nombre;
-    encuesta; //Tipo Encuesta
+    quiz; //Tipo Encuesta
 
-    constructor(username) {
+    constructor(username, quiz) {
         this.username = username;
-
+        this.quiz = quiz
     }
 
 }
