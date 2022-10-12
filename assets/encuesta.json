@@ -1,0 +1,71 @@
+[{
+        "type": "conditional",
+        "title": "1. todo bn?",
+        "options": [
+            { "title": "Si", "value": 1 },
+            { "title": "No", "value": 2 }
+        ],
+        "activator": 1,
+        "nextQuestionIndex": 2
+    },
+    {
+        "type": "normal",
+        "title": "2. Nivel de Satisfacción",
+        "options": [
+            { "title": "Mal", "value": 1 },
+            { "title": "Bien", "value": 2 },
+            { "title": "Excelente", "value": 3 }
+        ]
+    },
+    {
+        "type": "normal",
+        "title": "3. Pregunta 3",
+        "options": [
+            { "title": "Ok", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 },
+            { "title": "Excelente", "value": 4 }
+        ]
+    },
+    {
+        "type": "normal",
+        "title": "4. hola 4",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ]
+    },
+    {
+        "type": "conditional",
+        "title": "5. hola 3",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ],
+        "activator": 3,
+        "nextQuestionIndex": 6
+    },
+    {
+        "type": "normal",
+        "title": "6. hola penultimo",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ]
+    },
+    {
+        "type": "normal",
+        "title": "7. hola final",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ]
+    }
+
+
+
+]
