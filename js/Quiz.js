@@ -41,14 +41,18 @@ export class Quiz {
                     <p>Ingrese su nombre de usuario para iniciar</p>
                     <input type="text" name="username" id="username" placeholder="username" />
                     <p class="quiz__description">Este Quiz tiene <span class="numberOfQuestions"> ${this.questions.length}</span> preguntas</p>
-                    <button id="welcome_btn" class="quiz__btn">Iniciar</button>
+                  
                 </div>
             `;
     } 
 
     async start(){
         await this.loadQuestions("../assets/encuesta.json")
-        await this.app.render(await this.getTemplate(),"quiz" ,this.setEvents);    
+        await this.app.render(await this.getTemplate(),"questions" ,this.setEvents); 
+        let question = this.app.getNextQuestion(0)
+        question.start()
+        this.app.answers.startGlobal();   
+ 
     }
     
 
@@ -62,7 +66,7 @@ export class Quiz {
     }
     startBtnEvent = async () =>{
         //1.agregar usuario a array de usuarios    
-        this.app.addUser(this);
+       // this.app.addUser(new Quiz("Encuesta 2", this.app));
         //2. cargar primera Pregunta
         let question = this.app.getNextQuestion(0)
         question.start()
