@@ -77,12 +77,14 @@ export class Display {
     }
 
     getNextQuestion(currentQuestion) {
-        this.currentQuestion = currentQuestion >= 0 ? currentQuestion : ++this.currentQuestion;
+        this.currentQuestion = currentQuestion >= 0 ? currentQuestion : this.currentQuestion = +this.currentQuestion + 1;
         if (this.currentQuestion <= this.questions.length) {
             return this.questions[this.currentQuestion];
         } else {
             alert("finalizado")
             this.answers.startPersonal();
+            return false;
+
         }
     }
 }
