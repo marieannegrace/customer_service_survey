@@ -7,7 +7,7 @@ export class Answers {
         return `
         <div id="resultscreen" class="resultscreen">
         <h2 class="quiz__subtitle">Resultados</h2>
-       ${  this.app.currentUser.quiz.questions.map(q=> q.response? '<p>' + q.title +' ' + q.response?.title  + '</p>':'' ).join("\n ")}
+       ${  this.app.currentUser.quiz.questions.map(q=> q.response? '<p>' + q.title +'<span class="red"> ' + q.response?.title  + '</span></p>':'' ).join("\n ")}
     </div>
       `;
     }

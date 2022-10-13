@@ -21,6 +21,12 @@
 
 .welcomescreen {}
 
+
+.red {
+    color: #da7676;
+}
+
+
 .resultscreen {
     background-color: #ede8e4;
     color: #1d3a42;

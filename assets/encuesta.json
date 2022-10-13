@@ -1,6 +1,6 @@
 [{
         "type": "conditional",
-        "title": "1. todo bn?",
+        "title": "1. ¿ Visito el supermercado olimpica en los ultimos 5 días?",
         "options": [
             { "title": "Si", "value": 1 },
             { "title": "No", "value": 2 }
@@ -10,7 +10,7 @@
     },
     {
         "type": "normal",
-        "title": "2. Nivel de Satisfacción",
+        "title": "2. Nivel de Satisfacción del servicio",
         "options": [
             { "title": "Mal", "value": 1 },
             { "title": "Bien", "value": 2 },
@@ -19,7 +19,7 @@
     },
     {
         "type": "normal",
-        "title": "3. Pregunta 3",
+        "title": "3. ¿Que le parecen los cambios de las instalaciones del supermercado?",
         "options": [
             { "title": "Ok", "value": 1 },
             { "title": "Mejor", "value": 2 },
@@ -29,7 +29,7 @@
     },
     {
         "type": "normal",
-        "title": "4. hola 4",
+        "title": "4. ¿Que le parecio la atención por parte del cajero del supermercado?",
         "options": [
             { "title": "Bien", "value": 1 },
             { "title": "Mejor", "value": 2 },
@@ -38,7 +38,7 @@
     },
     {
         "type": "conditional",
-        "title": "5. hola 3",
+        "title": "5. Despues de cambiar a infraestructura de nuestros parqueaderos ¿como se  sintio cuando los utilizo?",
         "options": [
             { "title": "Bien", "value": 1 },
             { "title": "Mejor", "value": 2 },
@@ -49,7 +49,7 @@
     },
     {
         "type": "normal",
-        "title": "6. hola penultimo",
+        "title": "6. Se cambiaron los estantes del pasillo de verduras , por unos mas ergonómico ¿como los  sintio?",
         "options": [
             { "title": "Bien", "value": 1 },
             { "title": "Mejor", "value": 2 },
@@ -58,14 +58,131 @@
     },
     {
         "type": "normal",
-        "title": "7. hola final",
+        "title": "7. las sillas de la cafecteria se cambiaron por unas ergonómicas ¿como las sintio?",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ]
+    },
+    {
+        "type": "normal",
+        "title": "8. Se amplio la entrada del supermercado, ¿como sintio el cambio?",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ]
+    }, {
+        "type": "normal",
+        "title": "9. ¿Como sintio el servicio por  parte del personal del area de decoración?",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ]
+    },
+    {
+        "type": "conditional",
+        "title": "10. ¿Que le parece  la decoración de navidad en comparación con la del año pasado?",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ],
+        "activator": 1,
+        "nextQuestionIndex": 14
+    },
+    {
+        "type": "normal",
+        "title": "11.Se instalo nuevos aires acondicionados en el supermercado para mejorar su experiencia ¿como los sintio?",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ]
+    },
+    {
+        "type": "normal",
+        "title": "12.  El día de super descuentos que le parecio en comparación con el año anterior¿como lo sintio?",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ]
+    },
+    {
+        "type": "conditional",
+        "title": "13. Se intalaron 5 nuevos puestos de cajeros ¿como los calificaría?",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ],
+        "activator": 1,
+        "nextQuestionIndex": 18
+    },
+    {
+        "type": "normal",
+        "title": "14. Se creo un espacio  para los amantes de los animales ¿como lo sintio?",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ]
+    },
+    {
+        "type": "normal",
+        "title": "15. Instalamos una feria artesanal en la entrada del supermercado ¿como siente el espacio de la feria?",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ]
+    },
+    {
+        "type": "normal",
+        "title": "16. Tenemos eventos culturales todo el año ¿como se ha sentido en los que ha podido participar?",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ]
+    },
+    {
+        "type": "normal",
+        "title": "17. Cambiamos los juegos de la zona de mascotas ¿que le parece?",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ]
+    },
+    {
+        "type": "normal",
+        "title": "18. Contamos con nueva zona de fumadores ¿que le parece la nueva zona?",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ]
+    },
+    {
+        "type": "normal",
+        "title": "19. Las nuevas plataformas digitales para clientes  de olimpica comenzaron a funcionar este año, ¿Que le parece estas nuevas plataformas?",
+        "options": [
+            { "title": "Bien", "value": 1 },
+            { "title": "Mejor", "value": 2 },
+            { "title": "Mal", "value": 3 }
+        ]
+    },
+    {
+        "type": "normal",
+        "title": "20. ¿Como siente la evolución de nuestras tiendas olimpicas?",
         "options": [
             { "title": "Bien", "value": 1 },
             { "title": "Mejor", "value": 2 },
             { "title": "Mal", "value": 3 }
         ]
     }
-
-
-
 ]

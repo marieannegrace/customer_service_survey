@@ -54,7 +54,7 @@ export class Question {
                        // app.render(survey.getQuestionScreen(nextQuestionIndex), "questions", questionScreenEvents)
                     } else {
                         const question = app.getNextQuestion()
-                        question.start();
+                        question? question.start():"";
                     }
                      app.answers.startGlobal();
                 }
