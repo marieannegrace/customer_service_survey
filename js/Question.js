@@ -56,7 +56,7 @@ export class Question {
                         const question = app.getNextQuestion()
                         question.start();
                     }
-                     app.answers.start();
+                     app.answers.startGlobal();
                 }
             )
         }
