@@ -47,7 +47,7 @@ export class Quiz {
     } 
 
     async start(){
-        await this.loadQuestions("../assets/encuesta.json")
+        await this.loadQuestions("https://marieannegrace.github.io/customer_service_survey/assets/encuesta.json")
         await this.app.render(await this.getTemplate(),"questions" ,this.setEvents); 
         let question = this.app.getNextQuestion(0)
         question.start()
