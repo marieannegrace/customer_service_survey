@@ -1,6 +1,6 @@
 import { User } from "./User.js";
-import { Answers } from "./answers.js";
-import { Quiz } from "./quiz.js";
+import { Answers } from "./Answers.js";
+import { Quiz } from "./Quiz.js";
 
 export class Display {
     selectorId; //string for query selector
