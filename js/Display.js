@@ -22,16 +22,17 @@ export class Display {
         events();
 
     }
+
     async getTemplate() {
         return `
             <div id="welcomescreen" class="welcomescreen">
-         
-                
                 <div id="questions"></div>
                 <p>Ingrese su nombre de usuario para iniciar</p>
                 <input type="text" name="username" id="username" placeholder="username" />
+                <span id="message"></span>
                 <button id="welcome_btn" class="quiz__btn">Iniciar</button>
             </div>
+
         `;
     }
 
@@ -41,6 +42,7 @@ export class Display {
         this.answers.startGlobal();
 
     }
+
     setEvents = () => {
         let app = this.app;
         let survey = this.survey;
@@ -49,20 +51,40 @@ export class Display {
         btn.addEventListener("click", this.startBtnEvent)
 
     }
+
     startBtnEvent = async() => {
-        //1.agregar usuario a array de usuarios    
-        this.addUser(new Quiz("Encuesta 2", this));
-        //2. cargar primera Pregunta
-        let question = this.app.getNextQuestion(0)
-        question.start()
+        try {
+            //check if have survey
+            let currentUser = localStorage.getItem("currentUser")
+            let user = {};
+            let questionIndex = 0;
+            if (currentUser) {
+                user = this.currentUser = new User(currentUser, new Quiz(`Bienvenido nuevamente ${currentUser}`, this))
+                questionIndex = localStorage.getItem("currentQuestion");
+            } else {
+                //1.agregar usuario a array de usuarios    
+                user = await this.addUser(new Quiz("Su primera encuesta", this));
+            }
+            user.quiz.start();
+            let question = this.getNextQuestion(questionIndex)
+            question.start()
+
+        } catch (error) {
+            console.log(error)
+        }
+
 
     }
-    addUser(quiz) {
+
+    async addUser(quiz) {
         const usernameInput = document.getElementById("username");
         this.currentUser = new User(usernameInput.value, quiz)
         quiz.title += " de " + this.currentUser.username
-        quiz.start();
         this.users.push(this.currentUser)
+            //Add to localStorage
+        localStorage.setItem("currentUser", this.currentUser.username)
+        localStorage.setItem("questionIndex", 0)
+
         this.answers.startGlobal();
 
         return this.currentUser;
@@ -79,10 +101,12 @@ export class Display {
     getNextQuestion(currentQuestion) {
         this.currentQuestion = currentQuestion >= 0 ? currentQuestion : this.currentQuestion = +this.currentQuestion + 1;
         if (this.currentQuestion <= this.questions.length) {
+            localStorage.setItem("currentQuestion", this.currentQuestion)
             return this.questions[this.currentQuestion];
+
         } else {
             alert("finalizado")
-            this.answers.startPersonal();
+                //this.answers.startPersonal();
             return false;
 
         }

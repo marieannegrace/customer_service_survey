@@ -3,9 +3,6 @@ import { Question } from "./Question.js";
 
 
 export class Quiz {
-    nQuestions;
-    nConditionalQuestions;
-    questionIndex;
     title;
     questions = [];
 
@@ -33,13 +30,12 @@ export class Quiz {
     async getTemplate() {
             return `
                 <div id="welcomescreen" class="welcomescreen">
-                ${this.currentQuestion> 0 &&  this.currentQuestion < this.questions.length ?  
-                    `<h2>Pregunta ${+this.currentQuestion+1}/${     this.questions.length }</h2>`: 
+                ${this.app.currentQuestion> 0 &&  this.app.currentQuestion < this.app.questions.length ?  
+                    `<h2>Pregunta ${+this.app.currentQuestion+1}/${     this.app.questions.length }</h2>`: 
                     `<h1 class="quiz__maintitle">${this.title}</h1>`}
                     
                     <div id="questions"></div>
-                    <p>Ingrese su nombre de usuario para iniciar</p>
-                    <input type="text" name="username" id="username" placeholder="username" />
+               
                     <p class="quiz__description">Este Quiz tiene <span class="numberOfQuestions"> ${this.questions.length}</span> preguntas</p>
                   
                 </div>
@@ -48,9 +44,9 @@ export class Quiz {
 
     async start(){
         await this.loadQuestions("https://marieannegrace.github.io/customer_service_survey/assets/encuesta.json")
-        await this.app.render(await this.getTemplate(),"questions" ,this.setEvents); 
-        let question = this.app.getNextQuestion(0)
-        question.start()
+        await this.app.render(await this.getTemplate(),"quiz" ,()=>{}); 
+        let question = await this.app.getNextQuestion(0)
+        await question.start()
         this.app.answers.startGlobal();   
  
     }
