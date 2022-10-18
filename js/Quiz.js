@@ -43,10 +43,10 @@ export class Quiz {
     } 
 
     async start(loadUrl){
-        if(loadUrl){
+         
             await this.loadQuestions("https://marieannegrace.github.io/customer_service_survey/assets/encuesta.json")
             await this.app.render(await this.getTemplate(),"quiz" ,()=>{}); 
-        }
+      
          let question = await this.app.getNextQuestion()
          question?  question.start(): ""; 
             this.app.answers.startGlobal();   
@@ -66,8 +66,9 @@ export class Quiz {
         //1.agregar usuario a array de usuarios    
        // this.app.addUser(new Quiz("Encuesta 2", this.app));
         //2. cargar primera Pregunta
-        let question = await this.app.getNextQuestion(0)
-        question.start()
+        this.app.startBtnEvent()
+     //   let question = await this.app.getNextQuestion(0)
+     //   question.start()
            
     }  
 

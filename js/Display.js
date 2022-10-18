@@ -26,12 +26,12 @@ export class Display {
 
     async getTemplate() {
         this.users = await JSON.parse(localStorage.getItem("users")) || []
-
+        const username = await localStorage.getItem("currentUser")
         return `
-        display
+            Beinvenido de nuevo Usuario: ${ username }
             <div id="welcomescreen" class="welcomescreen">
                 <div id="questions"></div>
-                <p>Ingrese su nombre de usuario para iniciar</p>
+                <p>Ingrese su nombre de usuario para iniciar con otro usuario</p>
                 <input type="text" name="username" id="username" placeholder="username" />
                 <span id="message"></span>
                 <button id="welcome_btn" class="quiz__btn">Iniciar</button>
@@ -46,7 +46,10 @@ export class Display {
 
         //check if have survey
         let currentUser = localStorage.getItem("currentUser")
-        let localQuiz = JSON.parse(localStorage.getItem("quiz"))
+        let localUsers = await JSON.parse(localStorage.getItem("users")) || []
+        let localUser = localUsers.find(user => user.username == currentUser)
+        let localQuiz = localUser.quiz;
+
         let user = {};
         let questionIndex = 0;
         if (currentUser) {
@@ -91,25 +94,20 @@ export class Display {
 
     startBtnEvent = async() => {
         try {
-            //check if have survey
-            let currentUser = localStorage.getItem("currentUser")
-            let user = {};
+            //1.agregar usuario a array de usuarios 
             let questionIndex = 0;
-            if (currentUser) {
-                user = this.currentUser = new User(currentUser, new Quiz(`Bienvenido nuevamente ${currentUser}`, this))
-                    //this.users = JSON.parse(localStorage.getItem("users"))
-                questionIndex = localStorage.getItem("currentQuestion");
-                user.quiz.start(false);
+            let user_exist = await this.addUser(new Quiz("Su primera encuesta", this));
+            if (!user_exist) {
+                //borrar todo local
+
+                this.currentQuestion = questionIndex;
+                let question = await this.getNextQuestion(this.currentQuestion)
+                question ? question.start() : "";
             } else {
-                //1.agregar usuario a array de usuarios    
-                user = await this.addUser(new Quiz("Su primera encuesta", this));
-
+                this.currentUser = await this.getLocalUser()
+                    // questionIndex = 21;
+                this.answers.startPersonal()
             }
-
-            this.currentQuestion = questionIndex;
-            let question = await this.getNextQuestion(this.currentQuestion)
-            question ? question.start() : this.answers.startPersonal();
-
         } catch (error) {
             console.log(error)
         }
@@ -120,23 +118,24 @@ export class Display {
     async addUser(quiz) {
         const usernameInput = document.getElementById("username");
         this.currentUser = new User(usernameInput.value, quiz)
-        const user_exist = this.updateLocalUser(this.currentUser)
+        const user_exist = await this.getLocalUser(this.currentUser)
         if (!user_exist) {
+            const user_exist = await this.updateLocalUser(this.currentUser)
             quiz.title += " de " + this.currentUser.username
             localStorage.setItem("currentQuestion", 0)
-            quiz.start(true)
+            await quiz.start(true)
 
         } else {
-            alert("ya realizó la encuesta")
-            quiz.start(true)
-            this.currentQuestion = 21;
-            localStorage.setItem("currentQuestion", 21)
+            this.currentUser = await this.getLocalUser(this.currentUser)
+            alert(`cargado al usuario ${this.currentUser.username}`)
+                //this.currentQuestion = 21;
+                //localStorage.setItem("currentQuestion", 21)
             this.answers.startPersonal();
         }
         localStorage.setItem("currentUser", this.currentUser.username)
         this.answers.startGlobal();
 
-        //return this.currentUser;
+        return user_exist;
     }
 
     setQuestions(questions) {
@@ -152,15 +151,13 @@ export class Display {
         // update or add a user
         let localUsers = await JSON.parse(localStorage.getItem("users")) || []
         let user_exist = false;
-        localUsers.map((locaUser, k) => {
-            if (user.username == locaUser.username) {
-                localUsers[k] = user;
-                localUsers[k].quiz.app = this
-                user_exist = true;
-
-            }
-        })
-
+        let localUser = localUsers.find(luser => luser.username == user.username)
+        if (localUser) {
+            localUser = user;
+            localUser.quiz.app = this;
+            user_exist = true;
+            localUsers.map((luser, k) => luser.username == localUser.username ? localUsers[k] = localUser : "")
+        }
         if (!user_exist) {
             localUsers.push(user)
         }
@@ -176,6 +173,23 @@ export class Display {
         return user_exist;
 
     }
+
+    async getLocalUser(user) {
+        // update or add a user
+        let localUsers = await JSON.parse(localStorage.getItem("users")) || []
+        let user_exist = false;
+        let localUser = localUsers.find(luser => luser.username == user.username)
+        if (localUser) {
+            user = localUser;
+            user.quiz.app = this;
+            user_exist = true;
+        }
+        this.users = localUsers;
+
+
+        return localUser;
+
+    }
     async getNextQuestion(currentQuestion) {
         this.currentQuestion = currentQuestion >= 0 ? currentQuestion : this.currentQuestion;
 
@@ -188,15 +202,13 @@ export class Display {
             };
         }))
 
-        if (this.currentQuestion < this.questions.length) {
+        if (this.currentQuestion <= this.questions.length) {
             this.updateLocalUser(this.currentUser)
             return this.questions[this.currentQuestion++];
 
         } else {
-            alert("ÿa finalizo esta encuesta")
-            localStorage.removeItem('currentUser');
-            localStorage.removeItem('quiz');
-            localStorage.removeItem('currentQuestion');
+            //alert("ÿa finalizo esta encuesta")
+
 
             this.answers.startPersonal();
             return false;

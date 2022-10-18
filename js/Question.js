@@ -15,7 +15,7 @@ export class Question {
             <div id="questionscreen" class="questionscreen">
 
                 <h3>${this.title}</h3>
-                <span>${this.response?.title}</span>
+             
                 <ul class="question__awswers">
                     ${this.options.map(opt =>  
                         `<li class="awswer ${this.response?.value == opt.value?'answer--correct':''}" 
