@@ -17,6 +17,7 @@ export class ConditionalQuestion extends Question {
         <div id="questionscreen" class="questionscreen">
             
             <h3 >${this.title} <span class="red">si opcion es ${this.activator}  salta a ${this.nextQuestionIndex +1}</span></h3>
+            <span>${this.response?.title}</span>
             <ul class="question__awswers">
                 ${this.options.map(opt =>  
                     `<li class="awswer" 

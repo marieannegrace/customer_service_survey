@@ -14,7 +14,7 @@ export class Quiz {
     async loadQuestions(url) {
         let response = await fetch(url);
         let questions = await response.json();
-        this.currentQuestion = 0;
+        // this.currentQuestion = 0;
         questions.forEach(question => {
             if (question.type == "conditional") {
                 this.questions.push(new ConditionalQuestion(question.title, question.options, this.app, question.activator, question.nextQuestionIndex))
@@ -42,12 +42,14 @@ export class Quiz {
             `;
     } 
 
-    async start(){
-        await this.loadQuestions("https://marieannegrace.github.io/customer_service_survey/assets/encuesta.json")
-        await this.app.render(await this.getTemplate(),"quiz" ,()=>{}); 
-        let question = await this.app.getNextQuestion(0)
-        await question.start()
-        this.app.answers.startGlobal();   
+    async start(loadUrl){
+        if(loadUrl){
+            await this.loadQuestions("https://marieannegrace.github.io/customer_service_survey/assets/encuesta.json")
+            await this.app.render(await this.getTemplate(),"quiz" ,()=>{}); 
+        }
+         let question = await this.app.getNextQuestion()
+         question?  question.start(): ""; 
+            this.app.answers.startGlobal();   
  
     }
     
@@ -64,7 +66,7 @@ export class Quiz {
         //1.agregar usuario a array de usuarios    
        // this.app.addUser(new Quiz("Encuesta 2", this.app));
         //2. cargar primera Pregunta
-        let question = this.app.getNextQuestion(0)
+        let question = await this.app.getNextQuestion(0)
         question.start()
            
     }  
